@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Interface.Services;
+using Web.Features.Estudiante;
+using Web.Features.Estudiante.Request;
 
 namespace Web.Controllers
 {
@@ -24,6 +26,31 @@ namespace Web.Controllers
         public async Task<IActionResult> ToggleActivo(int id)
         {
             await _estudianteService.ToggleActivoAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var estudiante = await _estudianteService.GetAsync(id);
+            if (estudiante == null)
+            {
+                return NotFound();
+            }
+
+            return View(EstudianteMapping.ToResquest(estudiante));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EstudianteRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View(request);
+
+            var model = EstudianteMapping.ToModel(request);
+
+            await _estudianteService.UpdateAsync(model);
+
             return RedirectToAction(nameof(Index));
         }
     }
