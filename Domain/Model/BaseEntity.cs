@@ -2,7 +2,7 @@
 
 namespace Domain.Model
 {
-    public class BaseEntityy<TKey> : IEntity<TKey>
+    public class BaseEntity<TKey> : IEntity<TKey>
     {
         public TKey Id { get; set; }
     }

@@ -3,13 +3,11 @@ using Repository.Interface.Repositories;
 using Service.Interface.Services;
 using Microsoft.EntityFrameworkCore;
 using Repository.Context;
-using AutoMapper;
 
 namespace Service.Services
 {
-    public abstract class BaseService<TEntity, TRequest, TPrimary, TRepository> : IBaseService<TEntity, TRequest, TPrimary>
+    public abstract class BaseService<TEntity, TPrimary, TRepository> : IBaseService<TEntity, TPrimary>
         where TEntity : IEntity<TPrimary>
-        where TRequest : class
         where TRepository : IBaseRepository<TEntity, TPrimary>
     {
         protected readonly TRepository Repository;
@@ -59,22 +57,6 @@ namespace Service.Services
             return entities;
         }
 
-        public Task<TEntity> AddAsync(TRequest entityRequest)
-        {
-            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<TRequest, TEntity>()));
-            var model = mapper.Map<TEntity>(entityRequest);
-
-            return this.AddAsync(model);
-        }
-
-        public Task<IEnumerable<TEntity>> AddAsync(ICollection<TRequest> entitiesRequest)
-        {
-            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<ICollection<TRequest>, ICollection<TEntity>>()));
-            var models = mapper.Map<ICollection<TEntity>>(entitiesRequest);
-
-            return this.AddAsync(models);
-        }
-
         public virtual Task UpdateAsync(TEntity entity)
         {
             Repository.Update(entity);
@@ -87,16 +69,7 @@ namespace Service.Services
             return Context.SaveChangesAsync();
         }
 
-        public Task UpdateAsync(TPrimary id, TRequest entityRequest)
-        {
-            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<TRequest, TEntity>()));
-            var model = mapper.Map<TEntity>(entityRequest);
-            model.Id = id;
-
-            return this.UpdateAsync(model);
-        }
-
-        public virtual async Task DeleteAsync(TPrimary id)
+         public virtual async Task DeleteAsync(TPrimary id)
         {
             var model = await GetAsync(id);
             if (model != null)
