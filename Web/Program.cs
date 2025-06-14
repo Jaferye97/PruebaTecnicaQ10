@@ -17,6 +17,9 @@ builder.Services.AddDbContext<EntityDbContext>(options =>
 builder.Services.AddScoped<IEstudianteRepository, EstudianteRepository>();
 builder.Services.AddScoped<IEstudianteService, EstudianteService>();
 
+builder.Services.AddScoped<IMateriaRepository, MateriaRepository>();
+builder.Services.AddScoped<IMateriaService, MateriaService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
