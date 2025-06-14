@@ -15,5 +15,6 @@ namespace Repository.Context
 
         public DbSet<Estudiante> Estudiante { get; set; }
         public DbSet<Materia> Materia { get; set; }
+        public DbSet<Semestre> Semestre { get; set; }
     }
 }
