@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository.Context
 {
@@ -12,5 +13,6 @@ namespace Repository.Context
           : base(options)
         { }
 
+        public DbSet<Estudiante> Estudiante { get; set; }
     }
 }
