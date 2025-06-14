@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	ViewData["Title"] = "Historial Materia Estudiante Semestre";
+}
+<div class="mb-3">
+	<label>Buscar estudiante:</label>
+	<input type="text" id="buscarInput" class="form-control" placeholder="Nombre o documento..." />
+</div>
+
+<div class="mb-3">
+	<label>Resultados:</label>
+	<select id="estudianteSelect" class="form-select">
+		<option value="">-- Seleccione un estudiante --</option>
+	</select>
+</div>
+
+
+<button id="btnBuscarHistorial" class="btn btn-primary mb-3">Buscar historial</button>
+
+<table class="table table-bordered" id="tablaHistorial" style="display:none;">
+	<thead>
+		<tr>
+			<th>Materia</th>
+			<th>Créditos</th>
+			<th>Año</th>
+			<th>Semestre</th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+</table>
+
+@section Scripts {
+	<script src="~/js/historial-materiaEstudianteSemestre.js"></script>
+}
