@@ -21,5 +21,12 @@ namespace Web.Controllers
             return View(materias);
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ToggleActivo(int id)
+        {
+            await _materiaService.ToggleActivoAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

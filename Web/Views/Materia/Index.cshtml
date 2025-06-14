@@ -18,17 +18,18 @@
                 <th>Documento</th>
                 <th>Correo</th>
                 <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var estudiante in Model)
+            @foreach (var materia in Model)
             {
                 <tr>
-                    <td>@estudiante.Nombre</td>
-                    <td>@estudiante.Codigo</td>
-                    <td>@estudiante.Creditos</td>
+                    <td>@materia.Nombre</td>
+                    <td>@materia.Codigo</td>
+                    <td>@materia.Creditos</td>
                     <td class="text-center">
-                        @if (estudiante.Activo)
+                        @if (materia.Activo)
                         {
                             <span class="badge bg-success">Activo</span>
                         }
@@ -36,6 +37,13 @@
                         {
                             <span class="badge bg-secondary">Inactivo</span>
                         }
+                    </td>
+                    <td class="text-center">
+                        <form asp-action="ToggleActivo" asp-route-id="@materia.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm @(materia.Activo ? "btn-danger" : "btn-success")">
+                                @(materia.Activo ? "Desactivar" : "Activar")
+                            </button>
+                        </form>
                     </td>
                 </tr>
             }
