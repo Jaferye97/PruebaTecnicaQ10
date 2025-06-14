@@ -9,5 +9,6 @@ namespace Domain.Model
         public string Nombre { get; set; }
         public string Documento { get; set; }
         public string Correo { get; set; }
+        public bool Activo { get; set; }
     }
 }

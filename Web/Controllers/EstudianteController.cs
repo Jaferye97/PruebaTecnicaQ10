@@ -19,5 +19,12 @@ namespace Web.Controllers
             var estudiantes = await _estudianteService.GetAllAsync();
             return View(estudiantes);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ToggleActivo(int id)
+        {
+            await _estudianteService.ToggleActivoAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

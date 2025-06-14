@@ -4,5 +4,6 @@ namespace Service.Interface.Services
 {
     public interface IEstudianteService : IBaseService<Estudiante, int>
     {
+        Task ToggleActivoAsync(int id);
     }
 }

@@ -13,5 +13,15 @@ namespace Service.Services
         {
             this._EstudianteRepository = repository;
         }
+
+        public async Task ToggleActivoAsync(int id)
+        {
+            var estudiante = await _EstudianteRepository.GetAsync(id);
+            if (estudiante != null)
+            {
+                estudiante.Activo = !estudiante.Activo;
+                await base.UpdateAsync(estudiante);
+            }
+        }
     }
 }
