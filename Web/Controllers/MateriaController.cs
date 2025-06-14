@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Interface.Services;
+using Web.Features.Materia;
+using Web.Features.Materia.Request;
 
 namespace Web.Controllers
 {
@@ -26,6 +28,36 @@ namespace Web.Controllers
         public async Task<IActionResult> ToggleActivo(int id)
         {
             await _materiaService.ToggleActivoAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var materia = await _materiaService.GetAsync(id);
+            if (materia == null)
+            {
+                return NotFound();
+            }
+
+            return View(MateriaMapping.ToResquest(materia));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(MateriaRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View(request);
+            var model = MateriaMapping.ToModel(request);
+
+            if (await _materiaService.ExisteCodigoAsync(request.Codigo, request.Id))
+            {
+                ModelState.AddModelError("Codigo", "Ya existe una materia diferente con ese codigo.");
+                return View(request);
+            }
+
+            await _materiaService.UpdateAsync(model);
+
             return RedirectToAction(nameof(Index));
         }
     }

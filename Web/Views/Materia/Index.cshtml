@@ -39,6 +39,7 @@
                         }
                     </td>
                     <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@materia.Id" class="btn btn-sm btn-warning me-2">Editar</a>
                         <form asp-action="ToggleActivo" asp-route-id="@materia.Id" method="post" class="d-inline">
                             <button type="submit" class="btn btn-sm @(materia.Activo ? "btn-danger" : "btn-success")">
                                 @(materia.Activo ? "Desactivar" : "Activar")
