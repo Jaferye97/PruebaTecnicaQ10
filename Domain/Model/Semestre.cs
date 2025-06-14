@@ -9,5 +9,7 @@ namespace Domain.Model
         public int Mes { get; set; }
         public int Anio { get; set; }
         public bool Activo { get; set; }
+
+        public ICollection<MateriaEstudianteSemestre> MateriaEstudianteSemestre { get; set; } = new List<MateriaEstudianteSemestre>();
     }
 }

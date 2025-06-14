@@ -10,5 +10,7 @@ namespace Domain.Model
         public string Codigo { get; set; }
         public int Creditos { get; set; }
         public bool Activo { get; set; }
+
+        public ICollection<MateriaEstudianteSemestre> MateriaEstudianteSemestre { get; set; } = new List<MateriaEstudianteSemestre>();
     }
 }

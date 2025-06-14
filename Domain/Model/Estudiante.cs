@@ -10,5 +10,7 @@ namespace Domain.Model
         public string Documento { get; set; }
         public string Correo { get; set; }
         public bool Activo { get; set; }
+
+        public ICollection<MateriaEstudianteSemestre> MateriaEstudianteSemestre { get; set; } = new List<MateriaEstudianteSemestre>();
     }
 }
