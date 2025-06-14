@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Repository.Context;
+using Repository.Interface.Repositories;
+using Repository.Repositories;
+using Service.Interface.Services;
+using Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,9 @@ builder.Services.AddControllersWithViews();
 // Conexion Bd
 builder.Services.AddDbContext<EntityDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionDb")));
+
+builder.Services.AddScoped<IEstudianteRepository, EstudianteRepository>();
+builder.Services.AddScoped<IEstudianteService, EstudianteService>();
 
 var app = builder.Build();
 

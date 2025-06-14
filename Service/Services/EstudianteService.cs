@@ -1,0 +1,17 @@
+﻿using Domain.Model;
+using Repository.Context;
+using Repository.Interface.Repositories;
+using Service.Interface.Services;
+
+namespace Service.Services
+{
+    public class EstudianteService : BaseService<Estudiante, int, IEstudianteRepository>, IEstudianteService
+    {
+        private readonly IEstudianteRepository _EstudianteRepository;
+
+        public EstudianteService(EntityDbContext context, IEstudianteRepository repository) : base(context, repository)
+        {
+            this._EstudianteRepository = repository;
+        }
+    }
+}
