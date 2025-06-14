@@ -49,8 +49,36 @@ namespace Web.Controllers
 
             var model = EstudianteMapping.ToModel(request);
 
+            if (await _estudianteService.ExisteDocumentoAsync(request.Documento, request.Id))
+            {
+                ModelState.AddModelError("Documento", "Ya existe un estudiante diferente con ese documento.");
+                return View(request);
+            }
+
             await _estudianteService.UpdateAsync(model);
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(EstudianteRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View(request);
+
+            if(await _estudianteService.ExisteDocumentoAsync(request.Documento))
+            {
+                ModelState.AddModelError("Documento", "Ya existe un estudiante con ese documento.");
+                return View(request);
+            }
+
+            await _estudianteService.AddAsync(EstudianteMapping.ToModel(request));
             return RedirectToAction(nameof(Index));
         }
     }
