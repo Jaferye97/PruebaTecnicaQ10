@@ -60,5 +60,27 @@ namespace Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(MateriaRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View(request);
+
+            if (await _materiaService.ExisteCodigoAsync(request.Codigo))
+            {
+                ModelState.AddModelError("Documento", "Ya existe una materia con ese codigo.");
+                return View(request);
+            }
+
+            await _materiaService.AddAsync(MateriaMapping.ToModel(request));
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
