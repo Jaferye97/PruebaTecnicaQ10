@@ -38,7 +38,11 @@ namespace Service.Services
             }
 
             return result.Count > 0;
+        }
 
+        public async Task<List<Materia>> GetAllActivos()
+        {
+            return await _MateriaRepository.GetWithPredicateAsync(x => x.Activo == true);
         }
     }
 }

@@ -38,7 +38,16 @@ namespace Service.Services
             }
 
             return result.Count > 0;
+        }
 
+        public async Task<List<Estudiante>> GetByNombreDocumentoByFilter(string filter)
+        {
+            return await _EstudianteRepository.GetWithPredicateAsync(x => x.Nombre.Contains(filter) || x.Documento.Contains(filter));
+        }
+
+        public async Task<List<Estudiante>> GetAllActivos()
+        {
+            return await _EstudianteRepository.GetWithPredicateAsync(x => x.Activo == true);
         }
     }
 }

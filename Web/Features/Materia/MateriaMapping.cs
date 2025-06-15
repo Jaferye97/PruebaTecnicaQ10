@@ -23,7 +23,7 @@ namespace Web.Features.Materia
                 Id = request.Id,
                 Nombre = request.Nombre,
                 Codigo = request.Codigo,
-                Creditos = request.Creditos,
+                Creditos = (int)request.Creditos,
                 Activo = request.Activo
             };
         }

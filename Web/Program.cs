@@ -23,6 +23,9 @@ builder.Services.AddScoped<IMateriaService, MateriaService>();
 builder.Services.AddScoped<ISemestreRepository, SemestreRepository>();
 builder.Services.AddScoped<ISemestreService, SemestreService>();
 
+builder.Services.AddScoped<IMateriaEstudianteSemestreRepository, MateriaEstudianteSemestreRepository>();
+builder.Services.AddScoped<IMateriaEstudianteSemestreService, MateriaEstudianteSemestreService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

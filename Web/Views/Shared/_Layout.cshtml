@@ -25,11 +25,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Materia" asp-action="Index">Gestíon Materia</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AsignacionMateriaEstudiante" asp-action="Index">Asignación Materia-Estudiante</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @ViewBag.Mensaje
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

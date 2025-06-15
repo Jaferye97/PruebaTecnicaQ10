@@ -13,5 +13,10 @@ namespace Service.Services
         {
             this._SemestreRepository = repository;
         }
+
+        public async Task<List<Semestre>> GetAllActivos()
+        {
+            return await _SemestreRepository.GetWithPredicateAsync(x => x.Activo == true);
+        }
     }
 }
