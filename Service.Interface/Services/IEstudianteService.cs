@@ -7,5 +7,6 @@ namespace Service.Interface.Services
         Task ToggleActivoAsync(int id);
         Task<bool>ExisteDocumentoAsync(string documento, int idRegistroActualizando = 0);
         Task<List<Estudiante>> GetByNombreDocumentoByFilter(string filter);
+        Task<List<Estudiante>> GetAllActivos();
     }
 }

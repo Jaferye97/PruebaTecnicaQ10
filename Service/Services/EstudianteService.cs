@@ -44,5 +44,10 @@ namespace Service.Services
         {
             return await _EstudianteRepository.GetWithPredicateAsync(x => x.Nombre.Contains(filter) || x.Documento.Contains(filter));
         }
+
+        public async Task<List<Estudiante>> GetAllActivos()
+        {
+            return await _EstudianteRepository.GetWithPredicateAsync(x => x.Activo == true);
+        }
     }
 }

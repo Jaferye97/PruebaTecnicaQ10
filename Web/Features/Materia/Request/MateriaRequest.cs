@@ -16,7 +16,7 @@ namespace Web.Features.Materia.Request
 
         [Required(ErrorMessage = "Los créditos son requeridos.")]
         [Range(1, int.MaxValue, ErrorMessage = "Los créditos deben ser mayores a 0.")]
-        public int Creditos { get; set; }
+        public int? Creditos { get; set; }
 
         public bool Activo { get; set; }
     }
