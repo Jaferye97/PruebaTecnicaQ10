@@ -1,0 +1,42 @@
+USE Q10_PruebaTecnica;
+GO
+
+--Datos Estudiante
+INSERT INTO Core.Estudiante (Nombre, Documento, Correo, Activo) VALUES
+('Juan Jaramillo', '25412542', 'juan.jaramillo@hotmail.com', 1),
+('Felipe Perez', '12445152', 'felipe.perez@hotmail.com', 1),
+('Santiago Camargo', '102545247', 'santiago.camargo@gmail.com', 1),
+('Ana Belez', '422236575', 'ana.belez@gmail.com', 1),
+('Carlos Herrera', '5485325', 'carlos.herrera@gmail.com', 0);
+
+--Datos Materia
+INSERT INTO Core.Materia (Nombre, Codigo, Creditos, Activo) VALUES
+('Matemáticas Fundamentos', 'MAT100', 3, 1),
+('Matemáticas Álgebra', 'MAT101', 5, 1),
+('Física', 'FIS101', 4, 1),
+('Química', 'QUI101', 4, 1),
+('Historia', 'HIS101', 2, 1),
+('Biología', 'BIO105', 3, 0);
+
+--Datos Semestre
+INSERT INTO Core.Semestre (Mes, Anio, Activo) VALUES
+(1, 2024, 0),
+(6, 2024, 0),
+(1, 2025, 0),
+(6, 2025, 1),
+(1, 2026, 1);
+
+--Datos EstudianteMateira
+INSERT INTO Core.MateriaEstudianteSemestre (EstudianteId, MateriaId, SemestreId) VALUES
+(1, 1, 1),
+(1, 2, 1),
+(2, 1, 2),
+(2, 3, 2),
+(3, 4, 1),
+(3, 2, 2),
+(3, 5, 3),
+(4, 1, 3),
+(4, 4, 3),
+(5, 3, 4),
+(5, 5, 5),
+(1, 3, 2);

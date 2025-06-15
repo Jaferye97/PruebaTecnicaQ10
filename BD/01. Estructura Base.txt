@@ -1,0 +1,91 @@
+CREATE DATABASE Q10_PruebaTecnica;
+GO
+
+USE Q10_PruebaTecnica;
+GO
+
+CREATE SCHEMA Core;
+GO
+
+--Tabla Estudiante
+CREATE TABLE Core.Estudiante (
+    Id INT IDENTITY(1,1),
+    Nombre NVARCHAR(100) NOT NULL,
+    Documento NVARCHAR(20) NOT NULL,
+    Correo NVARCHAR(100) NOT NULL,
+	Activo BIT NOT NULL
+);
+GO
+
+ALTER TABLE Core.Estudiante ADD CONSTRAINT PK_Estudiante PRIMARY KEY (Id);
+GO
+
+ALTER TABLE Core.Estudiante ADD CONSTRAINT UQ_Estudiante_Documento UNIQUE (Documento);
+GO
+
+ALTER TABLE Core.Estudiante ADD CONSTRAINT DF_Estudiante_Activo DEFAULT 1 FOR Activo;
+GO
+
+--Tabla Materia
+CREATE TABLE Core.Materia (
+    Id INT IDENTITY(1,1),
+    Nombre NVARCHAR(100) NOT NULL,
+    Codigo NVARCHAR(10) NOT NULL,
+    Creditos INT NOT NULL,
+	Activo BIT NOT NULL
+);
+GO
+
+ALTER TABLE Core.Materia ADD CONSTRAINT PK_Materia PRIMARY KEY (Id);
+GO
+
+ALTER TABLE Core.Materia ADD CONSTRAINT UQ_Codigo_Materia UNIQUE (Codigo);
+GO
+
+ALTER TABLE Core.Materia ADD CONSTRAINT DF_Materia_Activo DEFAULT 1 FOR Activo;
+GO
+
+--Tabla Semestre
+CREATE TABLE Core.Semestre (
+    Id INT IDENTITY(1,1),
+    Mes INT NOT NULL,
+    Anio INT NOT NULL,
+	Activo BIT NOT NULL
+);
+GO
+
+ALTER TABLE Core.Semestre ADD CONSTRAINT PK_Semestre PRIMARY KEY (Id);
+GO
+
+ALTER TABLE Core.Semestre ADD CONSTRAINT CHK_Semestre_MesValido CHECK (Mes BETWEEN 1 AND 12);
+GO
+
+ALTER TABLE Core.Semestre ADD CONSTRAINT CHK_Semestre_AnioValido CHECK (Anio >= 2000);
+GO
+
+ALTER TABLE Core.Semestre ADD CONSTRAINT DF_Semestre_Activo DEFAULT 1 FOR Activo;
+GO
+
+--Tabla EstudianteMateria
+CREATE TABLE Core.MateriaEstudianteSemestre (
+	Id INT IDENTITY(1,1),
+    EstudianteId INT NOT NULL,
+    MateriaId INT NOT NULL,
+    SemestreId INT NOT NULL
+);
+GO
+
+ALTER TABLE Core.MateriaEstudianteSemestre ADD CONSTRAINT PK_MateriaEstudianteSemestre PRIMARY KEY (Id);
+GO
+
+ALTER TABLE Core.MateriaEstudianteSemestre ADD CONSTRAINT FK_MateriaEstudianteSemestre_Estudiante FOREIGN KEY (EstudianteId) REFERENCES Core.Estudiante(Id);
+GO
+
+ALTER TABLE Core.MateriaEstudianteSemestre ADD CONSTRAINT FK_MateriaEstudianteSemestre_Materia FOREIGN KEY (MateriaId) REFERENCES Core.Materia(Id);
+GO
+
+ALTER TABLE Core.MateriaEstudianteSemestre ADD CONSTRAINT FK_MateriaEstudianteSemestre_Semestre FOREIGN KEY (SemestreId) REFERENCES Core.Semestre(Id);
+GO
+
+ALTER TABLE Core.MateriaEstudianteSemestre ADD CONSTRAINT UQ_MateriaEstudianteSemestre_MateriaEstadianteSemestre UNIQUE (EstudianteId, MateriaId, SemestreId);
+GO
