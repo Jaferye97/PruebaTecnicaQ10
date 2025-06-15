@@ -9,11 +9,13 @@ Está desarrollado en ASP.NET Core MVC siguiendo una arquitectura limpia con sep
 - .NET 8 SDK o superior
 - SQL Server Express
 - SQL Server Management Studio
+- GitHub
 
 ---
 
 ## 📁 Estructura del Proyecto
 
+```txt
 PruebaTecnicaQ10
 ├── Domain # Entidades del dominio y modelos de vista
 │ └── Model # Entidades como Estudiante, Materia, Semestre
@@ -36,8 +38,15 @@ PruebaTecnicaQ10
 │ ├── Features # Request y Response con mapping 
 │ ├── Views # Vistas Razor (.cshtml)
 │ └── appsettings.json # Configuraciones (incluye cadena de conexión)
+```
 
-## 1. Crear Base de Datos
+---
+
+## 🚀 Instrucciones para ejecutar el proyecto
+
+### 1. Clonar el repositorio y cambiar a la rama `develop`
+
+### 2. Crear Base de Datos
 
 Ve a la carpeta del proyecto llamada `BD` y ejecuta los siguientes scripts en orden utilizando SQL Server Express o en SQL Server Management Studio:
 
@@ -47,9 +56,7 @@ Ve a la carpeta del proyecto llamada `BD` y ejecuta los siguientes scripts en or
 2. **02. Datos de prueba.txt**  
    Inserta datos de ejemplo en las tablas.
 
----
-
-## 2. Configurar la Cadena de Conexión
+### 3. Configurar la Cadena de Conexión
 
 Abre el archivo `appsettings.json` ubicado en el proyecto `Web`.
 
